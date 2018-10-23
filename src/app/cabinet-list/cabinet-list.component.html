@@ -1,0 +1,32 @@
+<h1 class="display-1">Schaltschränke</h1>
+<!-- create cabinet -->
+<app-cabinet-create></app-cabinet-create>
+
+<hr />
+
+<ul>
+  <li *ngFor="let cabinet of cabinets">
+    {{cabinet.id}}
+  </li>
+</ul>
+<!-- loop cabinets -->
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Breite</th>
+      <th>Höhe</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>[id auslesen]</td>
+      <td>[width auslesen]</td>
+      <td>[height auslesen]</td>
+      <td>
+        <button class="btn btn-danger">löschen</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,28 @@
+// BOOTSTRAP
+@import "variables";
+@import "~bootstrap/scss/bootstrap";
+// MATERIAL ICON
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+// ############################################################
+//  HEADER
+// ############################################################
+#header {
+  @extend .mb-5;
+  //
+  // NAVBAR
+  .navbar {
+    .navbar-brand {
+      img {
+        width: 3rem;
+      }
+    } // END .navbar-brand
+    ul {
+      li {
+        a {
+          .material-icons { vertical-align: bottom; }
+        } // END A
+      } // END LI
+    } // END UL
+  } // END .navbar
+} // END #header

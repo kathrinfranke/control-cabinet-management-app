@@ -1,0 +1,7 @@
+// BUTTONS
+button[type='submit']:disabled {
+  background-color: lightgrey;
+  border-color: grey;
+  color: dimgrey;
+  cursor: not-allowed;
+}
