@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
-// import { AppRoutingModule } from './app-routing.module'; // TODO: nochmal anschauen & ändern
 import { MatIconModule } from "@angular/material/icon";
 import { StorageServiceModule } from 'angular-webstorage-service';
 
@@ -43,7 +42,6 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     CommonModule,
-    // AppRoutingModule,
     RouterModule.forRoot(routes),
     MatIconModule,
     StorageServiceModule,
