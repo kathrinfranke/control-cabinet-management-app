@@ -8,13 +8,6 @@ import * as $ from 'jquery';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent {
 
-  public ngOnInit()
-  {
-    $(document).ready(function(){
-      console.log('ready!');
-    });
-  }
-  
 }
