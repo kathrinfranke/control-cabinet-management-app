@@ -10,14 +10,22 @@ import { Observable } from 'rxjs';
 
 export class CabinetListComponent implements OnInit {
 
-  cabinets: Object;
-
   constructor(private data: DataService) { }
 
   ngOnInit() {
-    // this.data.getCabinets().subscribe(
-    //   data => this.cabinets = data
-    // );
+    this.cabinets = this.data.getCabinets();
+  }
+
+  // DELETE ITEM
+  onDeleteItem(cabinet_id) {
+    if (confirm("Sind Sie sicher, dass Sie den Schaltschrank mit der ID "+cabinet_id+" löschen möchten?")) {
+      let index2remove = this.cabinets.findIndex( cabinetitem => cabinetitem.id === cabinet_id );
+      if (index2remove!==-1) {
+        let updatedCabinets = this.cabinets;
+        updatedCabinets.splice(index2remove,1);
+        localStorage.setItem('cabinets', JSON.stringify(updatedCabinets));
+      }
+    }
   }
 
 }

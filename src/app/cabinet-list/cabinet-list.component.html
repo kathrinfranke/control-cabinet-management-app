@@ -4,11 +4,6 @@
 
 <hr />
 
-<ul>
-  <li *ngFor="let cabinet of cabinets">
-    {{cabinet.id}}
-  </li>
-</ul>
 <!-- loop cabinets -->
 <table class="table table-dark">
   <thead>
@@ -20,13 +15,15 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>[id auslesen]</td>
-      <td>[width auslesen]</td>
-      <td>[height auslesen]</td>
-      <td>
-        <button class="btn btn-danger">löschen</button>
+    <tr *ngFor="let cabinet of cabinets">
+      <td>{{cabinet["id"]}}</td>
+      <td>{{cabinet["width"]}}</td>
+      <td>{{cabinet["height"]}}</td>
+      <td class="text-right">
+        <button class="btn btn-danger" (click)="onDeleteItem(cabinet.id)">löschen</button>
       </td>
     </tr>
   </tbody>
 </table>
+
+<div *ngIf='cabinets?.length === 0'>Keine Einträge vorhanden.</div>
