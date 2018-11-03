@@ -9,6 +9,8 @@ import { DataService } from '../data.service';
 
 export class CabinetListComponent implements OnInit {
 
+  cabinets: any[];
+
   constructor(private data: DataService) { }
 
   ngOnInit() {
