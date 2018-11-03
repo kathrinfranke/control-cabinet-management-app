@@ -16,13 +16,18 @@ import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './home/home.component';
 import { CabinetListComponent } from './cabinet-list/cabinet-list.component';
 import { CabinetCreateComponent } from './cabinet-create/cabinet-create.component';
+import { CabinetDetailComponent } from './cabinet-detail/cabinet-detail.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full'},
   // SCHALTSCHRÄNKE
   {
-      path:       'schaltschraenke',
-      component:  CabinetListComponent
+    path:       'schaltschraenke',
+    component:  CabinetListComponent
+  },
+  {
+    path:       'schaltschraenke/:id',
+    component:  CabinetDetailComponent
   }
   // GERÄTE
 
@@ -37,7 +42,8 @@ const routes: Routes = [
     HeaderComponent,
     HomeComponent,
     CabinetListComponent,
-    CabinetCreateComponent
+    CabinetCreateComponent,
+    CabinetDetailComponent
   ],
   imports: [
     BrowserModule,

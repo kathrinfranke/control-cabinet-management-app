@@ -19,7 +19,8 @@
       <td>{{cabinet["id"]}}</td>
       <td>{{cabinet["width"]}}</td>
       <td>{{cabinet["height"]}}</td>
-      <td class="text-right">
+      <td class="action-buttons">
+        <a [routerLink]="['/schaltschraenke', cabinet.id]" class="btn btn-success">anzeigen</a>
         <button class="btn btn-danger" (click)="onDeleteItem(cabinet.id)">löschen</button>
       </td>
     </tr>

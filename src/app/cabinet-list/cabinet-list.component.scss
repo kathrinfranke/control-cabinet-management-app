@@ -1,17 +1,8 @@
-.cabinet {
-  border: 10px solid black;
-  background: lightgrey;
-  width: 100px;
-  height: 200px;
-  position: relative;
-
-  .item {
-    position: absolute;
-    background-color: DeepPink;
-    border: 1px solid Purple;
-    &:nth-child(1) { bottom: 0; left: 0; width: 20px; height: 10px; }
-    &:nth-child(2) { bottom: 10px; left: 0; width: 30px; height: 30px; }
-    &:nth-child(1) { bottom: 40px; left: 0; width: 15px; height: 15px; }
-  }
-
-}
+.action-buttons {
+  text-align: right;
+  .btn {
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
+  } // END .btn
+} // END .button-actions
