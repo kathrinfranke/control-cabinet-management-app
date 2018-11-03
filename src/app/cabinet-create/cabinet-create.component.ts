@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
-
 import * as $ from 'jquery';
 
 @Component({
@@ -11,7 +9,6 @@ import * as $ from 'jquery';
 })
 
 export class CabinetCreateComponent {
-
     // FORM
     cabinetForm = new FormGroup({
       id: new FormControl('', [Validators.required]),
