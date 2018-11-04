@@ -11,8 +11,8 @@ export class CabinetCreateComponent {
     // FORM
     cabinetForm = new FormGroup({
       id: new FormControl('', [Validators.required]),
-      width: new FormControl('', [Validators.required, Validators.min(10), Validators.max(30)]),
-      height: new FormControl('', [Validators.required, Validators.min(10), Validators.max(50)])
+      width: new FormControl('', [Validators.required, Validators.min(1), Validators.max(30)]),
+      height: new FormControl('', [Validators.required, Validators.min(1), Validators.max(50)])
     });
 
     addCabinet() {
