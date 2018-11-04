@@ -1,0 +1,27 @@
+<h1 class="display-1">Geräte</h1>
+
+<app-device-create></app-device-create>
+
+<hr />
+
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Breite</th>
+      <th>Höhe</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let device of this.data.getLocalStorageData('devices')">
+      <td>{{device["id"]}}</td>
+      <td>{{device["width"]}}</td>
+      <td>{{device["height"]}}</td>
+      <td class="action-buttons">
+        <a [routerLink]="['/geraete', device.id]" class="btn btn-success">anzeigen</a>
+        <button class="btn btn-danger" (click)="onDeleteItem(device.id)">löschen</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

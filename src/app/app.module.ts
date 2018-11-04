@@ -14,9 +14,14 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 
 import { HomeComponent } from './home/home.component';
+// - CABINETS
 import { CabinetListComponent } from './cabinet-list/cabinet-list.component';
 import { CabinetCreateComponent } from './cabinet-create/cabinet-create.component';
 import { CabinetDetailComponent } from './cabinet-detail/cabinet-detail.component';
+// - DEVICES
+import { DeviceCreateComponent } from './device-create/device-create.component';
+import { DeviceListComponent } from './device-list/device-list.component';
+import { DeviceDetailComponent } from './device-detail/device-detail.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full'},
@@ -28,9 +33,16 @@ const routes: Routes = [
   {
     path:       'schaltschraenke/:id',
     component:  CabinetDetailComponent
-  }
+  },
   // GERÄTE
-
+  {
+    path:       'geraete',
+    component:  DeviceListComponent
+  },
+  {
+    path:       'geraete/:id',
+    component:  DeviceDetailComponent
+  }
   // ERROR PAGES
   // { path: '**', redirectTo: '/' + AppConfig.routes.error404 }
 ];
@@ -43,7 +55,10 @@ const routes: Routes = [
     HomeComponent,
     CabinetListComponent,
     CabinetCreateComponent,
-    CabinetDetailComponent
+    CabinetDetailComponent,
+    DeviceCreateComponent,
+    DeviceListComponent,
+    DeviceDetailComponent
   ],
   imports: [
     BrowserModule,
