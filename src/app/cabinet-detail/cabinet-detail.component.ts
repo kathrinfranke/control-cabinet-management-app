@@ -12,7 +12,7 @@ export class CabinetDetailComponent implements OnInit {
 
   constructor(private data: DataService, private route: ActivatedRoute) {
     let id = this.route.snapshot.params["id"];
-    this.cabinet = JSON.parse(this.data.getCabinetDetail(id))[0];
+    this.cabinet = JSON.parse(this.data.getLocalStorageDataItem('cabinets',id))[0];
   }
 
   ngOnInit() {
