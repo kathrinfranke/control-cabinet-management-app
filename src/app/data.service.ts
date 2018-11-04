@@ -7,21 +7,21 @@ export class DataService {
 
   constructor() { }
 
-  getCabinets() {
-    let cabinets = JSON.parse(localStorage.getItem('cabinets'));
-    return cabinets;
+  getLocalStorageData(key = 'cabinets') {
+    let localStorageData = JSON.parse(localStorage.getItem(key));
+    return localStorageData;
   }
 
-  getCabinetDetail(id) {
-    let findme = this.getCabinets().findIndex( cabinetitem => cabinetitem.id === id );
+  getLocalStorageDataItem(key = 'cabinets',id) {
+    let findme = this.getLocalStorageData(key).findIndex( item => item.id === id );
     if (findme !== -1) {
-      let cabinet = JSON.parse(localStorage.getItem('cabinets')).splice(findme,1);
-      cabinet = JSON.stringify(cabinet);
-      return cabinet;
+      let localStorageDataItem = JSON.parse(localStorage.getItem(key)).splice(findme,1);
+      localStorageDataItem = JSON.stringify(localStorageDataItem);
+      return localStorageDataItem;
     } else {
       // TODO: richtiges error handling einbinden
       console.log('record not found');
-      window.location.href = '/schaltschraenke';
+      window.location.href = '/';
     }
   }
 

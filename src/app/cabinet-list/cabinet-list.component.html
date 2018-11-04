@@ -15,7 +15,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let cabinet of this.data.getCabinets()">
+    <tr *ngFor="let cabinet of this.data.getLocalStorageData('cabinets')">
       <td>{{cabinet["id"]}}</td>
       <td>{{cabinet["width"]}}</td>
       <td>{{cabinet["height"]}}</td>
@@ -26,5 +26,3 @@
     </tr>
   </tbody>
 </table>
-
-<div *ngIf='cabinets?.length === 0'>Keine Einträge vorhanden.</div>

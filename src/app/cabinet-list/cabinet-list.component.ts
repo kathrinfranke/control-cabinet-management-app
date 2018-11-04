@@ -14,7 +14,7 @@ export class CabinetListComponent implements OnInit {
   constructor(private data: DataService) { }
 
   ngOnInit() {
-    this.cabinets = this.data.getCabinets();
+    this.cabinets = this.data.getLocalStorageData('cabinets');
   }
 
   // DELETE ITEM
