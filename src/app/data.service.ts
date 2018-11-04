@@ -21,7 +21,7 @@ export class DataService {
     } else {
       // TODO: richtiges error handling einbinden
       console.log('record not found');
-      window.location.href = '/';
+      // window.location.href = '/';
     }
   }
 
