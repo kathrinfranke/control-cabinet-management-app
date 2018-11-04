@@ -1,0 +1,13 @@
+.cabinet-button, .device-button {
+  display: inline-block;
+  transition: all 0.7s;
+  &:hover {
+    text-decoration: none;
+    &:not(.disabled) {
+      transform: scale(1.05);
+    }
+    &.disabled {
+      cursor: not-allowed;
+    }
+  }
+}

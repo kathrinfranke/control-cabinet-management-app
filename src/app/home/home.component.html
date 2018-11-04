@@ -1,1 +1,24 @@
 <h1 class="display-1">Welcome</h1>
+
+<p>
+  Derzeit sind {{cabinet_counter}} Schaltschränke und {{device_coutner}} vorhanden.
+</p>
+
+<div class="row">
+  <div class="col-sm-6 d-flex align-items-stretch flex-column">
+    <a routerLink="/schaltschraenke" class="cabinet-button bg-info p-5 h-100 text-center">
+      <h2 class="display-2 text-white">
+        Schaltschränke
+        <span class="badge badge-light">{{cabinet_counter}}</span>
+      </h2>
+    </a>
+  </div>
+  <div class="col-sm-6 d-flex align-items-stretch flex-column">
+    <a routerLink="/geraete" class="cabinet-button bg-secondary p-5 h-100 text-center">
+      <h2 class="display-2 text-white">
+        Geräte
+      </h2>
+      <span class="badge badge-light">{{device_counter}}</span>
+    </a>
+  </div>
+</div>
