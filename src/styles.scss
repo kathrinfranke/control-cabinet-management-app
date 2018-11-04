@@ -26,3 +26,23 @@
     } // END UL
   } // END .navbar
 } // END #header
+
+// ############################################################
+//  FORMS
+// ############################################################
+//
+// BUTTONS
+button[type='submit']:disabled {
+  background-color: lightgrey;
+  border-color: grey;
+  color: dimgrey;
+  cursor: not-allowed;
+}
+.action-buttons {
+  text-align: right;
+  .btn {
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
+  } // END .btn
+} // END .button-actions

@@ -3,8 +3,7 @@ import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-cabinet-list',
-  templateUrl: './cabinet-list.component.html',
-  styleUrls: ['./cabinet-list.component.scss']
+  templateUrl: './cabinet-list.component.html'
 })
 
 export class CabinetListComponent implements OnInit {

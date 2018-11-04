@@ -4,8 +4,7 @@ import * as $ from 'jquery';
 
 @Component({
   selector: 'app-cabinet-create',
-  templateUrl: './cabinet-create.component.html',
-  styleUrls: ['./cabinet-create.component.scss']
+  templateUrl: './cabinet-create.component.html'
 })
 
 export class CabinetCreateComponent {
