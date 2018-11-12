@@ -19,6 +19,11 @@ export class CabinetListComponent implements OnInit {
   // DELETE ITEM
   onDeleteItem(cabinet_id) {
     if (confirm("Sind Sie sicher, dass Sie den Schaltschrank mit der ID "+cabinet_id+" löschen möchten?")) {
+
+      // TODO: cabinet_devices-einträge löschen
+      alert('Diese Funktion wird überarbeitet und ist daher vorübergehend deaktiviert');
+      return false;
+
       let index2remove = this.cabinets.findIndex( cabinetitem => cabinetitem.id === cabinet_id );
       if (index2remove!==-1) {
         let updatedCabinets = this.cabinets;

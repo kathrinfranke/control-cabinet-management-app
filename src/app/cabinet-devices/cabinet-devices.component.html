@@ -1,0 +1,34 @@
+<h1 class="display-1">Gerät <span class="d-inline-block px-3 text-white bg-dark">{{device["id"]}}</span> einem Schaltschrank zuweisen</h1>
+
+<p>
+  <b>Maße Gerät {{device["id"]}}:</b> <br />
+  Breite: {{device_width}} | Höhe: {{device_height}}
+</p>
+
+<hr />
+
+<form [formGroup]="cabinetDeviceForm" (ngSubmit)="addDeviceToCabinet()">
+  <div class="form-group row">
+    <div class="col-sm-6">
+      <div id="cabinetMockup" class="d-none cabinet-mockup mx-auto my-2" [ngStyle]="{width: styleCabinetWidth + 'px', height: styleCabinetHeight + 'px'}">
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <select formControlName="cabinetSelect" class="form-control" #cabinet (change)="onCabinetChange(cabinet.value)">
+         <option [value]="'none'" selected>-- Schaltschrank wählen --</option>
+         <option [value]="cabinet.id" *ngFor="let cabinet of cabinets">{{cabinet.id}}</option>
+       </select>
+       <div class="d-none" id="cabinetDetails">
+         <b>Maße Schaltschrank {{selected_cabinet["id"]}}:</b><br />
+         Breite: <b>{{selected_cabinet["width"]}}</b> | Höhe: <b>{{selected_cabinet["height"]}}</b>
+       </div>
+       <select formControlName="coordinateSelect" class="form-control my-4" #coord>
+        <option [value]="'none'" selected>-- Positionierung wählen --</option>
+        <option [ngValue]="coord" *ngFor="let coord of coordinates">x: {{coord['x']}} / y: {{coord['y']}}</option>
+      </select>
+      <div class="text-right">
+        <button type="submit" [disabled]="!cabinetDeviceForm.valid" class="btn btn-success">zuweisen</button>
+      </div>
+     </div>
+  </div>
+</form>

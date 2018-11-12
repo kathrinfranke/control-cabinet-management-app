@@ -10,6 +10,7 @@
       <th>ID</th>
       <th>Breite</th>
       <th>Höhe</th>
+      <th>Schaltschrank</th>
       <th></th>
     </tr>
   </thead>
@@ -18,6 +19,12 @@
       <td>{{device["id"]}}</td>
       <td>{{device["width"]}}</td>
       <td>{{device["height"]}}</td>
+      <td>
+        <div *ngIf="displayAssignedCabinet(device['id']) != undefined">
+          <span class="d-inline-block px-3 text-dark bg-light">{{displayAssignedCabinet(device["id"])}}</span><br />
+        </div>
+        <a [routerLink]="['/geraete/zuweisen', device.id]" class="btn btn-info" [hidden]="displayAssignedCabinet(device['id']) != undefined">zuweisen</a>
+      </td>
       <td class="action-buttons">
         <a [routerLink]="['/geraete', device.id]" class="btn btn-success">anzeigen</a>
         <button class="btn btn-danger" (click)="onDeleteItem(device.id)">löschen</button>

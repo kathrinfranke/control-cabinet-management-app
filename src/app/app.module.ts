@@ -22,6 +22,8 @@ import { CabinetDetailComponent } from './cabinet-detail/cabinet-detail.componen
 import { DeviceCreateComponent } from './device-create/device-create.component';
 import { DeviceListComponent } from './device-list/device-list.component';
 import { DeviceDetailComponent } from './device-detail/device-detail.component';
+// - CABINET-DEVICES
+import { CabinetDevicesComponent } from './cabinet-devices/cabinet-devices.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full'},
@@ -42,6 +44,11 @@ const routes: Routes = [
   {
     path:       'geraete/:id',
     component:  DeviceDetailComponent
+  },
+  // SCHALTSCHRÄNKE - GERÄTE
+  {
+    path:       'geraete/zuweisen/:id',
+    component:  CabinetDevicesComponent
   }
   // ERROR PAGES
   // { path: '**', redirectTo: '/' + AppConfig.routes.error404 }
@@ -58,7 +65,8 @@ const routes: Routes = [
     CabinetDetailComponent,
     DeviceCreateComponent,
     DeviceListComponent,
-    DeviceDetailComponent
+    DeviceDetailComponent,
+    CabinetDevicesComponent
   ],
   imports: [
     BrowserModule,
