@@ -17,7 +17,7 @@ export class DataService {
     let findme = this.getLocalStorageData(key).findIndex( item => item.id === id );
     if (findme !== -1) {
       let localStorageDataItem = JSON.parse(localStorage.getItem(key)).splice(findme,1);
-      localStorageDataItem = JSON.stringify(localStorageDataItem);
+      localStorageDataItem = localStorageDataItem;
       return localStorageDataItem;
     } else {
       // TODO: richtiges error handling einbinden
@@ -40,6 +40,22 @@ export class DataService {
         }
       });
       return result;
+    }
+  }
+
+  numberOfCabinetDevices(cabinet_id) {
+    var n = this.getCabinetDevices(cabinet_id) === undefined ? 0 : this.getCabinetDevices(cabinet_id).length;
+    return n > 0 ? n : '(keine)';
+  }
+
+  // CHECK IF DEVICE IS ALREADY ASSIGNED TO CABINET
+  assignableCheck(device_id) {
+    let cabinetDevices = this.getLocalStorageData('cabinet_devices');
+    if (cabinetDevices) {
+      let assigned = cabinetDevices.findIndex(c => c.device_id == device_id);
+      return assigned === -1;
+    } else {
+      return true;
     }
   }
 
@@ -68,16 +84,16 @@ export class DataService {
       // TODO: fertigstellen, bugs beheben
       cabinet_devices.forEach(cabinet_device => {
         // DEVICE DATA
-        var deviceData = JSON.parse(this.getLocalStorageDataItem('devices',cabinet_device['device_id']))[0];
+        var deviceData = this.getLocalStorageDataItem('devices',cabinet_device['device_id'])[0];
         // POSITION
         var pos_x = cabinet_device['position']['x'];
         var pos_y = cabinet_device['position']['y'];
         // DEVICE COORDINATES
         var device_width = deviceData['width'];
         var device_height = deviceData['height'];
-        for (var _w = pos_x; _w <= device_width+pos_x; _w++) {
+        for (var _w = pos_x; _w < (device_width+pos_x); _w++) {
           var position_x = _w;
-          for (var _h = pos_y; _h <= device_height+pos_y; _h++) {
+          for (var _h = pos_y; _h < (device_height+pos_y); _h++) {
             var position_y = _h;
             var coords = {
               x: position_x,

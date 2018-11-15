@@ -1,9 +1,9 @@
 .cabinet-mockup {
-  border-radius: 5px;
   position: relative;
-  background-color: hsl(0,0%,90%);
-  box-shadow: inset hsla(0,0%,15%,  1) 0  0px 0px 4px, inset hsla(0,0%,15%, .8) 0 -1px 5px 4px, inset hsla(0,0%,0%, .25) 0 -1px 0px 7px, inset hsla(0,0%,100%,.7) 0  2px 1px 7px;
-  background-image: -webkit-repeating-linear-gradient(left, hsla(0,0%,100%,0) 0%, hsla(0,0%,100%,0) 6%, hsla(0,0%,100%, .1) 7.5%), -webkit-repeating-linear-gradient(left, hsla(0,0%,  0%,0) 0%, hsla(0,0%,  0%,0)   4%, hsla(0,0%,  0%,.03) 4.5%),-webkit-repeating-linear-gradient(left, hsla(0,0%,100%,0) 0%, hsla(0,0%,100%,0) 1.2%, hsla(0,0%,100%,.15) 2.2%),linear-gradient(180deg, hsl(0,0%,78%) 0%, hsl(0,0%,90%) 47%, hsl(0,0%,78%) 53%, hsl(0,0%,70%)100%);
+  background-color: lightgrey;
+  outline: 2px solid black;
+  box-shadow: inset rgba(255, 255, 255, 0.7) 0 2px 11px 0px;
+  background-image: linear-gradient(180deg, #c7c7c7 0%, #e6e5e5 40%, #c7c7c7 79%, #b3b2b2 100%);
   &:before, &:after {
     content: '';
     width: 10px;
@@ -14,4 +14,11 @@
   }
   &:before { left: 5px; }
   &:after { right: 5px; }
+  // CABINET DEVICES
+  .cabinet-device {
+    position: absolute;
+    border: 1px dotted black;
+    background-color: rgba(162,48,48,0.3);
+  }
+
 }

@@ -1,19 +1,35 @@
 <h1 class="display-1">Gerät <span class="d-inline-block px-3 text-white bg-dark">{{device["id"]}}</span> einem Schaltschrank zuweisen</h1>
 
-<p>
-  <b>Maße Gerät {{device["id"]}}:</b> <br />
-  Breite: {{device_width}} | Höhe: {{device_height}}
-</p>
+<div [hidden]="this.data.assignableCheck(device['id']) == true" class="alert alert-warning">
+  <p class="mb-0">
+    Das Gerät wurde bereits einem Schaltschrank zugewiesen.<br />
+    <a class="text-dark" routerLink="/geraete"><i class="material-icons">navigate_before</i> zurück zur Übersicht</a>
+  </p>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <p>
+      <b>Maße Gerät {{device["id"]}}:</b> <br />
+      Breite: {{device_width}} | Höhe: {{device_height}}
+    </p>
+  </div>
+</div>
 
 <hr />
 
-<form [formGroup]="cabinetDeviceForm" (ngSubmit)="addDeviceToCabinet()">
-  <div class="form-group row">
-    <div class="col-sm-6">
-      <div id="cabinetMockup" class="d-none cabinet-mockup mx-auto my-2" [ngStyle]="{width: styleCabinetWidth + 'px', height: styleCabinetHeight + 'px'}">
+<div class="row">
+
+  <div class="col-sm-6">
+    <div id="cabinetMockup" class="d-none cabinet-mockup mx-auto my-2" [ngStyle]="{width: styleCabinetWidth + 'px', height: styleCabinetHeight + 'px'}">
+      <div *ngFor="let cabinetDevice of this.cabinetDevices">
+        <span class="cabinet-device" [ngStyle]="setCabinetDeviceStyles(cabinetDevice['device_id'],cabinetDevice['position'])">
+        </span>
       </div>
     </div>
-    <div class="col-sm-6">
+  </div>
+  <div class="col-sm-6">
+    <form [formGroup]="cabinetDeviceForm" (ngSubmit)="addDeviceToCabinet()" [hidden]="this.data.assignableCheck(device['id']) == false">
       <select formControlName="cabinetSelect" class="form-control" #cabinet (change)="onCabinetChange(cabinet.value)">
          <option [value]="'none'" selected>-- Schaltschrank wählen --</option>
          <option [value]="cabinet.id" *ngFor="let cabinet of cabinets">{{cabinet.id}}</option>
@@ -29,6 +45,7 @@
       <div class="text-right">
         <button type="submit" [disabled]="!cabinetDeviceForm.valid" class="btn btn-success">zuweisen</button>
       </div>
-     </div>
+    </form>
   </div>
-</form>
+
+</div>

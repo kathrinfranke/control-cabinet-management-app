@@ -16,8 +16,6 @@ export class CabinetCreateComponent {
     });
 
     addCabinet() {
-      console.log('add new cabinet');
-      // ---------- SAVE TO LOCAL STORAGE ----------
       let key = 'cabinets';
       let data = this.cabinetForm.value;
       try {
@@ -27,7 +25,6 @@ export class CabinetCreateComponent {
         }
         cabinet.push(data);
         localStorage.setItem('cabinets', JSON.stringify(cabinet));
-        console.log(localStorage.getItem('cabinets'));
         $('form').prepend('<div class="alert alert-success" role="alert">Der Schaltschrank wurde erfolgreich gespeichert.</div>');
         setTimeout(function() {
           $('form .alert').fadeOut()
@@ -40,6 +37,6 @@ export class CabinetCreateComponent {
         }, 2000);
         console.error('Error saving to localStorage', e);
       }
-    } // END addCabinet()
+    } 
 
 }

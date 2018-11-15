@@ -9,10 +9,12 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class CabinetDetailComponent implements OnInit {
   cabinet: any[];
+  cabinet_devices: any;
 
   constructor(private data: DataService, private route: ActivatedRoute) {
     let id = this.route.snapshot.params["id"];
-    this.cabinet = JSON.parse(this.data.getLocalStorageDataItem('cabinets',id))[0];
+    this.cabinet = this.data.getLocalStorageDataItem('cabinets',id)[0];
+    this.cabinet_devices = this.data.numberOfCabinetDevices(this.cabinet['id']);
   }
 
   ngOnInit() {

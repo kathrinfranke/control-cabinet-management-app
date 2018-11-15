@@ -12,7 +12,7 @@ export class DeviceDetailComponent implements OnInit {
 
   constructor(private data: DataService, private route: ActivatedRoute) {
     let id = this.route.snapshot.params["id"];
-    this.device = JSON.parse(this.data.getLocalStorageDataItem('devices',id))[0];
+    this.device = this.data.getLocalStorageDataItem('devices',id)[0];
   }
 
   ngOnInit() {

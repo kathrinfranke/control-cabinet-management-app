@@ -11,14 +11,16 @@
       <th>ID</th>
       <th>Breite</th>
       <th>Höhe</th>
+      <th>Anzahl Geräte</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let cabinet of this.data.getLocalStorageData('cabinets')">
+    <tr *ngFor="let cabinet of this.data.getLocalStorageData('cabinets'); trackBy: trackHero">
       <td>{{cabinet["id"]}}</td>
       <td>{{cabinet["width"]}}</td>
       <td>{{cabinet["height"]}}</td>
+      <td>{{this.data.numberOfCabinetDevices(cabinet['id'])}}</td>
       <td class="action-buttons">
         <a [routerLink]="['/schaltschraenke', cabinet.id]" class="btn btn-success">anzeigen</a>
         <button class="btn btn-danger" (click)="onDeleteItem(cabinet.id)">löschen</button>

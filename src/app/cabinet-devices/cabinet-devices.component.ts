@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
   styleUrls: ['./cabinet-devices.component.scss']
 })
 export class CabinetDevicesComponent implements OnInit {
+  id: number[];
   device: any[];
   device_width: number;
   device_height: number;
@@ -17,9 +18,11 @@ export class CabinetDevicesComponent implements OnInit {
 
   selected_cabinet: any[];
   cabinetDevices: any[];
+  assignable: boolean;
 
   cabinetDetails: HTMLElement;
   cabinetMockup: HTMLElement;
+  styleZoomFactor: number;
   styleCabinetWidth: number;
   styleCabinetHeight: number;
 
@@ -27,13 +30,14 @@ export class CabinetDevicesComponent implements OnInit {
   cabinetDeviceForm: FormGroup;
 
   constructor(private data: DataService, private route: ActivatedRoute, private fb: FormBuilder) {
-    let id = this.route.snapshot.params['id'];
-    this.device = JSON.parse(this.data.getLocalStorageDataItem('devices',id))[0];
-    this.device_width = JSON.parse(this.data.getLocalStorageDataItem('devices',id))[0]['width'];
-    this.device_height = JSON.parse(this.data.getLocalStorageDataItem('devices',id))[0]['height'];
-    // TODO: nur Schränke verfügbarem Platz für Geräte
+    // DEVICE
+    this.id = this.route.snapshot.params['id'];
+    this.device = this.data.getLocalStorageDataItem('devices',this.id)[0];
+    this.device_width = this.device['width'];
+    this.device_height = this.device['height'];
+    //CABINET
     this.cabinets = this.data.getSuitableCabinets(this.device['width'],this.device['height']);
-    // DISABLE POSITION SELECTED
+    this.styleZoomFactor = 7;
   }
 
   ngOnInit() {
@@ -42,11 +46,9 @@ export class CabinetDevicesComponent implements OnInit {
       coordinateSelect: ['none','']
      });
      this.cabinetDeviceForm.controls.coordinateSelect.disable(); // TODO: schnellste Lösung / geht sicher anders und schöner
-  }
+   }
 
   onCabinetChange(cabinet_id) {
-   console.log('cabinet select changed | selected cabinet_id: ' + cabinet_id);
-   // TODO: clear form fields on change
    this.cabinetDetails = document.getElementById('cabinetDetails') as HTMLElement;
    this.cabinetMockup = document.getElementById('cabinetMockup') as HTMLElement;
    // CABINET SELECTED?
@@ -61,37 +63,32 @@ export class CabinetDevicesComponent implements OnInit {
       this.cabinetMockup.classList.remove("d-none");
       this.cabinetDeviceForm.controls.coordinateSelect.enable();
       // SELECTED CABINET
-      this.selected_cabinet = JSON.parse(this.data.getLocalStorageDataItem('cabinets',cabinet_id))[0];
+      this.selected_cabinet = this.data.getLocalStorageDataItem('cabinets',cabinet_id)[0];
       // ANY DEVICES?
       this.cabinetDevices = this.data.getCabinetDevices(this.selected_cabinet['id']);
-
       // POSITIONS / COORDINATES
-      // - ALL CABINET COORDINATES
-      let pos_x = Array(this.selected_cabinet['width']).fill(0).map((a, b) => a + b);
-      let pos_y = Array(this.selected_cabinet['height']).fill(0).map((a, b) => a + b);
+      // - GET ALL CABINET COORDINATES
+      let cabinet_width = this.selected_cabinet['width'];
+      let cabinet_height = this.selected_cabinet['height'];
       // - CABINET COORDINATES
       let coordinates = [];
-      let coord_val = [];
-      pos_x.forEach(function(x) {
-        var x = x;
-        pos_y.forEach(function(y) {
-          var y = y;
-          let coords = {
+      for(var _w = 0; _w < cabinet_width; _w++) {
+        var x = _w;
+        for(var _h = 0; _h < cabinet_height; _h++) {
+          var y = _h;
+          var coords = {
             x: x,
             y: y
           };
-          coord_val.push(coords);
-        });
-      });
-      coordinates.push(JSON.stringify(coord_val));
+          coordinates.push(coords);
+        };
+      };
       // FILTER CABINET COORDINATES FOR VALID DEVICE-POSITIONS
-      let filteredCoordinates = JSON.parse(coordinates.toString()).filter(coord => {
-        // WIDTHS AND HEIGHTS
-        let cabinet_width = this.selected_cabinet['width'];
-        let cabinet_height = this.selected_cabinet['height'];
+      let validDeviceCoordinates = coordinates.filter(coord => {
+        // DEVICE WIDTHS AND HEIGHTS
         let device_width = this.device_width;
-        let device_height = this.device_width;
-        // // COORDINATES
+        let device_height = this.device_height;
+        // COORDINATES
         let filter_coord_x = coord['x'];
         let filter_coord_y = coord['y'];
         // VALID?
@@ -100,30 +97,62 @@ export class CabinetDevicesComponent implements OnInit {
         // RETURN
         return valid_x && valid_y;
       });
-
+      // KEINE GERÄTE VORHANDEN? -> ALLE POSITIONEN VERFÜGBAR
       if (this.cabinetDevices === undefined) {
-        console.log('no cabinet devices present - all positions available');
-        this.coordinates = filteredCoordinates;
+        this.coordinates = validDeviceCoordinates;
+      // VERFÜGBARE KOORDINATEN ERMITTELN
       } else {
-        console.log('cabinet devices present');
-        // GET ASSIGNED DEVICES
         let assignedDevicesCoordinates = this.data.getAssignedDevicesCoordinates(this.cabinetDevices);
-        // REMOVE ASSIGNED DEVICE COORDINATES FROM CABINET COORDINATES
-        let filteredDevicesCoordinates = filteredCoordinates.filter(function(item){
-          var found = (JSON.stringify(assignedDevicesCoordinates)).indexOf(JSON.stringify(item));
-          return found === -1;
-        });
-        this.coordinates = filteredDevicesCoordinates;
+        let availableDeviceCoordinates = this.getAvailableCoordinates(validDeviceCoordinates,assignedDevicesCoordinates);
+        this.coordinates = availableDeviceCoordinates;
       }
       // STYLES
-      let zoomfactor = 7;
-      this.styleCabinetWidth = this.selected_cabinet['width'] * zoomfactor;
-      this.styleCabinetHeight = this.selected_cabinet['height'] * zoomfactor;
+      this.styleCabinetWidth = this.selected_cabinet['width'] * this.styleZoomFactor;
+      this.styleCabinetHeight = this.selected_cabinet['height'] * this.styleZoomFactor;
     }
   }
 
+  getAvailableCoordinates(availableCoords,assignedCoords) {
+    let finalCoordinates = [];
+    for (var i in availableCoords) {
+      var pos_x = availableCoords[i]['x'];
+      var pos_y = availableCoords[i]['y'];
+      var coords2check = [];
+      for (var _w: number = pos_x; _w < (this.device_width+pos_x); _w++) {
+        var position_x = _w;
+        for (var _h: number = pos_y; _h < (this.device_height+pos_y); _h++) {
+          var position_y = _h;
+          var coords = {
+            x: position_x,
+            y: position_y
+          };
+          coords2check.push(coords);
+        } // END y
+      } // END x
+      // CHECK IF DEVICE COORDINATES ARE AVAILABLE
+      let coordinateCheck = this.fitsToCabinetCheck(assignedCoords,coords2check);
+      if (coordinateCheck == true) {
+        if (JSON.stringify(finalCoordinates).indexOf(JSON.stringify(coords2check[0])) === -1) {
+          finalCoordinates.push(coords2check[0]);
+        }
+      }
+    }
+    return finalCoordinates;
+  }
+
+  fitsToCabinetCheck(assignedCoords,coords) {
+    var is_valid = true;
+    coords.forEach(function(c) {
+      var remove = JSON.stringify(assignedCoords).indexOf(JSON.stringify(c));
+      if (remove !== -1) {
+        is_valid = false;
+      }
+    });
+    return is_valid;
+  }
+
+
   addDeviceToCabinet() {
-    console.log('addDeviceToCabinet');
     let key = 'cabinet_devices';
     // FORM VALUES
     let selected_device = this.device['id'];
@@ -148,6 +177,17 @@ export class CabinetDevicesComponent implements OnInit {
       }, 2000);
       console.error('Error saving to localStorage', e);
     }
+  }
+
+  setCabinetDeviceStyles(device_id,position) { 
+    var device = this.data.getLocalStorageDataItem('devices',device_id)[0];
+    var styles = {
+      'width':  (device['width'] * this.styleZoomFactor)+'px',
+      'height': (device['height'] * this.styleZoomFactor)+'px',
+      'left':   (position['x'] * this.styleZoomFactor)+'px',
+      'bottom': (position['y'] * this.styleZoomFactor)+'px'
+    };
+    return styles;
   }
 
 }
