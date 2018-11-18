@@ -1,12 +1,11 @@
 <h1 class="display-1">Schaltschrank: <span class="d-inline-block px-3 text-white bg-dark">{{cabinet["id"]}}</span></h1>
 
-<table class="table table-dark">
+<table class="table table-dark mb-4">
   <thead>
     <tr>
       <th>ID</th>
       <th>Breite</th>
       <th>Höhe</th>
-      <th>Anzahl Geräte</th>
     </tr>
   </thead>
   <tbody>
@@ -14,7 +13,33 @@
       <td>{{cabinet["id"]}}</td>
       <td>{{cabinet["width"]}}</td>
       <td>{{cabinet["height"]}}</td>
-      <td>{{cabinet_devices}}</td>
     </tr>
   </tbody>
 </table>
+
+<p [hidden]="this.cabinet_devices.length > 0">
+  <em>Keine zugewiesenen Geräte vorhanden.</em>
+</p>
+
+<div [hidden]="this.cabinet_devices.length === 0">
+  <h1 class="display-3 mb-2">Zugewiesene Geräte ({{this.cabinet_devices.length}})</h1>
+
+  <table class="table table-dark">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Breite</th>
+        <th>Höhe</th>
+        <th>Position</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cabinet_device of this.cabinet_devices">
+        <td>{{this.data.getLocalStorageDataItem('devices',cabinet_device['device_id'])[0]['id']}}</td>
+        <td>{{this.data.getLocalStorageDataItem('devices',cabinet_device['device_id'])[0]['width']}}</td>
+        <td>{{this.data.getLocalStorageDataItem('devices',cabinet_device['device_id'])[0]['height']}}</td>
+        <td>x: {{cabinet_device['position']['x']}} / y: {{cabinet_device['position']['y']}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

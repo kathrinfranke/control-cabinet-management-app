@@ -14,7 +14,7 @@ export class CabinetDetailComponent implements OnInit {
   constructor(private data: DataService, private route: ActivatedRoute) {
     let id = this.route.snapshot.params["id"];
     this.cabinet = this.data.getLocalStorageDataItem('cabinets',id)[0];
-    this.cabinet_devices = this.data.numberOfCabinetDevices(this.cabinet['id']);
+    this.cabinet_devices = this.data.getCabinetDevices(this.cabinet['id']);
   }
 
   ngOnInit() {
