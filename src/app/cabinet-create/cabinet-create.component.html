@@ -33,6 +33,32 @@
 
   </div>
 
+  <!-- ERRORS -->
+  <div class="alert alert-warning" *ngIf="cabinetForm.get('id').hasError('NaN') || cabinetForm.get('width').hasError('NaN') || cabinetForm.get('height').hasError('NaN')">
+    <i class="material-icons">warning</i>
+    Es sind nur Zahlen erlaubt.
+  </div>
+  <div class="alert alert-warning" *ngIf="cabinetForm.get('id').hasError('nomatch')">
+    <i class="material-icons">warning</i>
+    Es gibt bereits einen Schaltschrank mit dieser ID.
+  </div>
+  <div class="alert alert-warning" *ngIf="cabinetForm.get('width').hasError('min')">
+    <i class="material-icons">warning</i>
+    Bitte geben Sie eine Breite > 0 ein.
+  </div>
+  <div class="alert alert-warning" *ngIf="cabinetForm.get('width').hasError('max')">
+    <i class="material-icons">warning</i>
+    Bitte geben Sie eine Breite <= 30 ein.
+  </div>
+  <div class="alert alert-warning" *ngIf="cabinetForm.get('height').hasError('min')">
+    <i class="material-icons">warning</i>
+    Bitte geben Sie eine Höhe > 0 ein.
+  </div>
+  <div class="alert alert-warning" *ngIf="cabinetForm.get('height').hasError('max')">
+    <i class="material-icons">warning</i>
+    Bitte geben Sie eine Höhe <= 50 ein.
+  </div>
+
   <div class="text-right">
     <button type="submit" [disabled]="!cabinetForm.valid" class="btn btn-success">speichern</button>
   </div>

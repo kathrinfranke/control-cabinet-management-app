@@ -4,10 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatIconModule } from "@angular/material/icon";
-import { StorageServiceModule } from 'angular-webstorage-service';
-
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from '@angular/common/http';
 
 // COMPONENTS
 import { AppComponent } from './app.component';
@@ -73,10 +70,8 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forRoot(routes),
     MatIconModule,
-    StorageServiceModule,
     FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
