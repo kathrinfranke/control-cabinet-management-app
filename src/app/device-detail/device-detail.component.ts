@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { DataService } from '../data.service';
 
@@ -6,7 +6,7 @@ import { DataService } from '../data.service';
   selector: 'app-device-detail',
   templateUrl: './device-detail.component.html'
 })
-export class DeviceDetailComponent implements OnInit {
+export class DeviceDetailComponent {
 
   device: any[];
   assignedCabinet: any;
@@ -17,9 +17,6 @@ export class DeviceDetailComponent implements OnInit {
     if (this.data.getAssignedCabinet(this.device['id']) !== undefined) {
       this.assignedCabinet = JSON.parse(this.data.getAssignedCabinet(this.device['id']))[0];
     }
-  }
-
-  ngOnInit() {
   }
 
 }
