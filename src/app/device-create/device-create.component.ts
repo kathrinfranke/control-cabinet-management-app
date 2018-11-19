@@ -23,13 +23,12 @@ export class DeviceCreateComponent implements OnInit {
 
   // CUSTOM VALIDATORS
   validID = (control: AbstractControl): { [key: string]: boolean } | null =>{
+    let resultOfValidation_length = 0;
     if (this.data.getLocalStorageData('devices') !== null) {
       let resultOfValidation = this.data.getLocalStorageData('devices').filter(device => {
         return device['id'] == control.value;
       });
-      let resultOfValidation_length = resultOfValidation.length
-    } else {
-      let resultOfValidation_length = 0;
+      let resultOfValidation_length = resultOfValidation.length;
     }
 
     if (resultOfValidation_length === 0) {
