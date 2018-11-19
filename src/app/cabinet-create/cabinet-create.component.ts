@@ -23,18 +23,22 @@ export class CabinetCreateComponent implements OnInit {
 
   // CUSTOM VALIDATORS
   validID = (control: AbstractControl): { [key: string]: boolean } | null =>{
-    let resultOfValidation = this.data.getLocalStorageData('cabinets').filter(cabinet => {
-      return cabinet['id'] == control.value;
-    });
+    if (this.data.getLocalStorageData('cabinets') !== null) {
+      let resultOfValidation = this.data.getLocalStorageData('cabinets').filter(cabinet => {
+        return cabinet['id'] == control.value;
+      });
+      let resultOfValidation_length = resultOfValidation.length
+    } else {
+      let resultOfValidation_length = 0;
+    }
 
-    if (resultOfValidation.length === 0) {
+    if (resultOfValidation_length === 0) {
       return null;
     } else {
       return { nomatch: true };
     }
   }
   validContent = (control: AbstractControl): { [key: string]: boolean } | null =>{
-    console.log(control.value);
     if ( !isNaN(control.value) && control.value !== undefined && control.value !== null ) {
       return null;
     } else {

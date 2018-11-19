@@ -23,18 +23,22 @@ export class DeviceCreateComponent implements OnInit {
 
   // CUSTOM VALIDATORS
   validID = (control: AbstractControl): { [key: string]: boolean } | null =>{
-    let resultOfValidation = this.data.getLocalStorageData('devices').filter(device => {
-      return device['id'] == control.value;
-    });
+    if (this.data.getLocalStorageData('devices') !== null) {
+      let resultOfValidation = this.data.getLocalStorageData('devices').filter(device => {
+        return device['id'] == control.value;
+      });
+      let resultOfValidation_length = resultOfValidation.length
+    } else {
+      let resultOfValidation_length = 0;
+    }
 
-    if (resultOfValidation.length === 0) {
+    if (resultOfValidation_length === 0) {
       return null;
     } else {
       return { nomatch: true };
     }
   }
   validContent = (control: AbstractControl): { [key: string]: boolean } | null =>{
-    console.log(control.value);
     if ( !isNaN(control.value) && control.value !== undefined && control.value !== null ) {
       return null;
     } else {

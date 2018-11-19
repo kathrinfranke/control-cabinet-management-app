@@ -4,27 +4,31 @@
 
 <hr />
 
-<!-- loop cabinets -->
-<table class="table table-dark">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Breite</th>
-      <th>Höhe</th>
-      <th>Anzahl Geräte</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let cabinet of this.data.getLocalStorageData('cabinets'); trackBy: trackHero">
-      <td>{{cabinet["id"]}}</td>
-      <td>{{cabinet["width"]}}</td>
-      <td>{{cabinet["height"]}}</td>
-      <td>{{this.data.numberOfCabinetDevices(cabinet['id'])}}</td>
-      <td class="action-buttons">
-        <a [routerLink]="['/schaltschraenke', cabinet.id]" class="btn btn-success">anzeigen</a>
-        <button class="btn btn-danger" (click)="onDeleteItem(cabinet.id)">löschen</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<p *ngIf="this.data.getLocalStorageData('cabinets') === null">
+  Derzeit sind noch keine Schaltschränke vorhanden.
+</p>
+<div *ngIf="this.data.getLocalStorageData('cabinets') !== null">
+  <table class="table table-dark">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Breite</th>
+        <th>Höhe</th>
+        <th>Anzahl Geräte</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cabinet of this.data.getLocalStorageData('cabinets');">
+        <td>{{cabinet["id"]}}</td>
+        <td>{{cabinet["width"]}}</td>
+        <td>{{cabinet["height"]}}</td>
+        <td>{{this.data.numberOfCabinetDevices(cabinet['id'])}}</td>
+        <td class="action-buttons">
+          <a [routerLink]="['/schaltschraenke', cabinet.id]" class="btn btn-success">anzeigen</a>
+          <button class="btn btn-danger" (click)="onDeleteItem(cabinet.id)">löschen</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
