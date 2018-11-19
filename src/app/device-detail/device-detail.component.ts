@@ -9,10 +9,14 @@ import { DataService } from '../data.service';
 export class DeviceDetailComponent implements OnInit {
 
   device: any[];
+  assignedCabinet: any;
 
   constructor(private data: DataService, private route: ActivatedRoute) {
     let id = this.route.snapshot.params["id"];
     this.device = this.data.getLocalStorageDataItem('devices',id)[0];
+    if (this.data.getAssignedCabinet(this.device['id']) !== undefined) {
+      this.assignedCabinet = JSON.parse(this.data.getAssignedCabinet(this.device['id']))[0];
+    }
   }
 
   ngOnInit() {

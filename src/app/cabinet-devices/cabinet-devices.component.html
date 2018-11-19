@@ -1,11 +1,5 @@
 <h1 class="display-1">Gerät <span class="d-inline-block px-3 text-white bg-dark">{{device["id"]}}</span> einem Schaltschrank zuweisen</h1>
 
-<div [hidden]="this.data.assignableCheck(device['id']) == true" class="alert alert-warning">
-  <p class="mb-0">
-    Das Gerät wurde bereits einem Schaltschrank zugewiesen.<br />
-    <a class="text-dark" routerLink="/geraete"><i class="material-icons">navigate_before</i> zurück zur Übersicht</a>
-  </p>
-</div>
 
 <div class="row">
   <div class="col-12">
@@ -17,6 +11,21 @@
 </div>
 
 <hr />
+
+<div [hidden]="this.data.assignableCheck(device['id']) == true" class="alert alert-warning">
+  <p class="mb-0">
+    Das Gerät wurde einem Schaltschrank zugewiesen.<br />
+    <a class="text-dark" routerLink="/geraete"><i class="material-icons">navigate_before</i> zurück zur Übersicht</a>
+  </p>
+</div>
+
+<div *ngIf="this.cabinets.length === 0" class="alert alert-warning">
+  <p class="mb-0">
+    Leider gibt es momentan keine Schaltschränke, in welche das Gerät passt.<br />
+    <a class="text-dark" routerLink="/schaltschraenke"><i class="material-icons">navigate_before</i> Jetzt Schaltschrank anlegen</a><br />
+    <a class="text-dark" routerLink="/geraete"><i class="material-icons">navigate_before</i> zurück zur Übersicht</a>
+  </p>
+</div>
 
 <div class="row">
 
@@ -32,7 +41,7 @@
     </div>
   </div>
   <div class="col-sm-6">
-    <form [formGroup]="cabinetDeviceForm" (ngSubmit)="addDeviceToCabinet()" [hidden]="this.data.assignableCheck(device['id']) == false">
+    <form [formGroup]="cabinetDeviceForm" (ngSubmit)="addDeviceToCabinet()" [hidden]="this.data.assignableCheck(device['id']) == false || this.cabinets.length === 0">
       <select formControlName="cabinetSelect" class="form-control" #cabinet (change)="onCabinetChange(cabinet.value)">
          <option [value]="'none'" selected>-- Schaltschrank wählen --</option>
          <option [value]="cabinet.id" *ngFor="let cabinet of cabinets">{{cabinet.id}}</option>

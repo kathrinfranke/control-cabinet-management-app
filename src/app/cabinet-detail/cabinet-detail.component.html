@@ -17,11 +17,11 @@
   </tbody>
 </table>
 
-<p [hidden]="this.cabinet_devices.length > 0">
+<p *ngIf="this.cabinet_devices.length === 0">
   <em>Keine zugewiesenen Geräte vorhanden.</em>
 </p>
 
-<div [hidden]="this.cabinet_devices.length === 0">
+<div *ngIf="this.cabinet_devices.length > 0">
   <h1 class="display-3 mb-2">Zugewiesene Geräte ({{this.cabinet_devices.length}})</h1>
 
   <table class="table table-dark">

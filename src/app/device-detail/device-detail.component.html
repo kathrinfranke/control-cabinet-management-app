@@ -6,6 +6,7 @@
       <th>ID</th>
       <th>Breite</th>
       <th>Höhe</th>
+      <th>Schaltschrank</th>
     </tr>
   </thead>
   <tbody>
@@ -13,6 +14,15 @@
       <td>{{device["id"]}}</td>
       <td>{{device["width"]}}</td>
       <td>{{device["height"]}}</td>
+      <td>
+        <div *ngIf="this.assignedCabinet === undefined || this.assignedCabinet.length === 0">
+          <a [routerLink]="['/geraete/zuweisen', device.id]" class="btn btn-info" [hidden]="this.data.getLocalStorageData('cabinets') === null">zuweisen</a>
+        </div>
+        <div *ngIf="this.assignedCabinet !== undefined">
+          <span class="d-inline-block px-3 text-dark bg-light">{{this.assignedCabinet['cabinet_id']}}</span><br />
+          (x: {{this.assignedCabinet['position']['x']}} / y: {{this.assignedCabinet['position']['y']}})
+        </div>
+      </td>
     </tr>
   </tbody>
 </table>

@@ -17,7 +17,4 @@ export class CabinetDetailComponent implements OnInit {
     this.cabinet_devices = this.data.getCabinetDevices(this.cabinet['id']);
   }
 
-  ngOnInit() {
-  }
-
 }

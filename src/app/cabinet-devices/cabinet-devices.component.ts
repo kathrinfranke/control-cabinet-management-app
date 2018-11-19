@@ -16,7 +16,6 @@ export class CabinetDevicesComponent implements OnInit {
   cabinets: any[];
   coordinates: any[];
 
-  selected_cabinet: any[];
   cabinetDevices: any[];
   assignable: boolean;
 
