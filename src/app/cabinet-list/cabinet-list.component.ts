@@ -21,10 +21,12 @@ export class CabinetListComponent implements OnInit {
     if (confirm("Sind Sie sicher, dass Sie den Schaltschrank mit der ID "+cabinet_id+" löschen möchten?")) {
       // REMOVE FROM CABINET DEVICES
       let cabinetDevices = this.data.getLocalStorageData('cabinet_devices');
-      let updatedCabinetDevices = cabinetDevices.filter(cabinet_device => {
-        return cabinet_device['cabinet_id'] != cabinet_id;
-      });
-      localStorage.setItem('cabinet_devices',JSON.stringify(updatedCabinetDevices));
+      if (cabinetDevices !== null) {
+        let updatedCabinetDevices = cabinetDevices.filter(cabinet_device => {
+          return cabinet_device['cabinet_id'] != cabinet_id;
+        });
+        localStorage.setItem('cabinet_devices',JSON.stringify(updatedCabinetDevices));
+      }
 
       // DELETE CABINET
       let cabinets = this.data.getLocalStorageData('cabinets');
