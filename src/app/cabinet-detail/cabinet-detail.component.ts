@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { DataService } from '../data.service';
 import { ActivatedRoute } from "@angular/router";
 
@@ -7,7 +7,7 @@ import { ActivatedRoute } from "@angular/router";
   templateUrl: './cabinet-detail.component.html',
   styleUrls: ['./cabinet-detail.component.scss']
 })
-export class CabinetDetailComponent implements OnInit {
+export class CabinetDetailComponent {
   cabinet: any[];
   cabinet_devices: any;
 
