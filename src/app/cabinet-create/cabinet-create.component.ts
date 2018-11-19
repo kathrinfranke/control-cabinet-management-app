@@ -15,7 +15,7 @@ export class CabinetCreateComponent implements OnInit {
 
   ngOnInit() {
     this.cabinetForm = this.fb.group({
-      id: new FormControl('', [Validators.required, this.validID, this.validContent]),
+      id: new FormControl('', [Validators.required, this.validID]),
       width: new FormControl('', [Validators.required, Validators.min(1), Validators.max(30), this.validContent]),
       height: new FormControl('', [Validators.required, Validators.min(1), Validators.max(50), this.validContent])
     });
@@ -23,22 +23,21 @@ export class CabinetCreateComponent implements OnInit {
 
   // CUSTOM VALIDATORS
   validID = (control: AbstractControl): { [key: string]: boolean } | null =>{
-    let resultOfValidation_length = 0;
     if (this.data.getLocalStorageData('cabinets') !== null) {
       let resultOfValidation = this.data.getLocalStorageData('cabinets').filter(cabinet => {
         return cabinet['id'] == control.value;
       });
-      let resultOfValidation_length = resultOfValidation.length;
-    }
-
-    if (resultOfValidation_length === 0) {
-      return null;
+      if (resultOfValidation.length === 0) {
+        return null;
+      } else {
+        return { nomatch: true };
+      }
     } else {
-      return { nomatch: true };
+      return null;
     }
   }
   validContent = (control: AbstractControl): { [key: string]: boolean } | null =>{
-    if ( !isNaN(control.value) && control.value !== undefined && control.value !== null ) {
+    if ( !isNaN(control.value) ) {
       return null;
     } else {
       return { NaN: true };
