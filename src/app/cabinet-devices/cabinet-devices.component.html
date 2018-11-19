@@ -22,10 +22,13 @@
 
   <div class="col-sm-6">
     <div id="cabinetMockup" class="d-none cabinet-mockup mx-auto my-2" [ngStyle]="{width: styleCabinetWidth + 'px', height: styleCabinetHeight + 'px'}">
-      <div *ngFor="let cabinetDevice of this.cabinetDevices">
-        <span class="cabinet-device" [ngStyle]="setCabinetDeviceStyles(cabinetDevice['device_id'],cabinetDevice['position'])">
-        </span>
+      <div class="cabinet-mockup--body">
+        <div *ngFor="let cabinetDevice of this.cabinetDevices">
+          <span class="cabinet-device" [ngStyle]="setCabinetDeviceStyles(cabinetDevice['device_id'],cabinetDevice['position'])">
+          </span>
+        </div>
       </div>
+      <div class="cabinet-mockup--feet"></div>
     </div>
   </div>
   <div class="col-sm-6">
@@ -38,7 +41,7 @@
          <b>Maße Schaltschrank {{selected_cabinet["id"]}}:</b><br />
          Breite: <b>{{selected_cabinet["width"]}}</b> | Höhe: <b>{{selected_cabinet["height"]}}</b>
        </div>
-       <select formControlName="coordinateSelect" class="form-control my-4" #coord>
+       <select formControlName="coordinateSelect" class="form-control my-4" #coord  (change)="onPositionChange()">
         <option [value]="'none'" selected>-- Positionierung wählen --</option>
         <option [ngValue]="coord" *ngFor="let coord of coordinates">x: {{coord['x']}} / y: {{coord['y']}}</option>
       </select>

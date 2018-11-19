@@ -179,7 +179,7 @@ export class CabinetDevicesComponent implements OnInit {
     }
   }
 
-  setCabinetDeviceStyles(device_id,position) { 
+  setCabinetDeviceStyles(device_id,position) {
     var device = this.data.getLocalStorageDataItem('devices',device_id)[0];
     var styles = {
       'width':  (device['width'] * this.styleZoomFactor)+'px',
@@ -188,6 +188,25 @@ export class CabinetDevicesComponent implements OnInit {
       'bottom': (position['y'] * this.styleZoomFactor)+'px'
     };
     return styles;
+  }
+
+  onPositionChange(coord_value) {
+    // REMOVE PREVIOUS ELEMENT
+    var oldDevicePlacement = document.getElementById('devicePlacement');
+    if (oldDevicePlacement !== null) {
+      oldDevicePlacement.parentNode.removeChild(oldDevicePlacement);
+    }
+    // ADD NEW ELEMENT
+    var position = this.cabinetDeviceForm.value.coordinateSelect;
+    var newDevicePlacement = document.createElement('span');
+    newDevicePlacement.setAttribute('id', 'devicePlacement');
+    newDevicePlacement.style.width = (this.device_width * this.styleZoomFactor)+'px';
+    newDevicePlacement.style.height = (this.device_height * this.styleZoomFactor)+'px';
+    newDevicePlacement.style.left = (position['x'] * this.styleZoomFactor)+'px';
+    newDevicePlacement.style.bottom = (position['y'] * this.styleZoomFactor)+'px';
+    newDevicePlacement.style.position = 'absolute';
+    newDevicePlacement.style.background = 'green';
+    document.getElementById('cabinetMockup').getElementsByClassName('cabinet-mockup--body')[0].appendChild(newDevicePlacement);
   }
 
 }
