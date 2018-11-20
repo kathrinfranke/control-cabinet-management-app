@@ -16,6 +16,8 @@ export class CabinetDevicesComponent implements OnInit {
   cabinets: any[];
   coordinates: any[];
 
+  selected_cabinet: any;
+
   cabinetDevices: any[];
   assignable: boolean;
 
@@ -48,10 +50,20 @@ export class CabinetDevicesComponent implements OnInit {
    }
 
   onCabinetChange(cabinet_id) {
-   this.cabinetDetails = document.getElementById('cabinetDetails') as HTMLElement;
-   this.cabinetMockup = document.getElementById('cabinetMockup') as HTMLElement;
-   // CABINET SELECTED?
-   if (cabinet_id == 'none') {
+    this.cabinetDetails = document.getElementById('cabinetDetails') as HTMLElement;
+    this.cabinetMockup = document.getElementById('cabinetMockup') as HTMLElement;
+    // REMOVE PREVIOUS ELEMENT
+    var oldDevicePlacement = document.getElementById('devicePlacement');
+    if (oldDevicePlacement !== null) {
+     oldDevicePlacement.parentNode.removeChild(oldDevicePlacement);
+    }
+    // RESET FORM
+    this.cabinetDeviceForm.reset({
+      cabinetSelect: cabinet_id,
+      coordinateSelect: 'none'
+    });
+    // CABINET SELECTED?
+    if (cabinet_id == 'none') {
      console.log('no value selected');
      this.cabinetDetails.classList.add("d-none");
      this.cabinetMockup.classList.add("d-none");
