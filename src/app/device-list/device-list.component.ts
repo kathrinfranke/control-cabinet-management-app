@@ -26,10 +26,12 @@ export class DeviceListComponent implements OnInit {
     if (confirm("Sind Sie sicher, dass Sie das Gerät mit der ID "+device_id+" löschen möchten?")) {
       // REMOVE FROM CABINET DEVICES
       let cabinetDevices = this.data.getLocalStorageData('cabinet_devices');
-      let updatedCabinetDevices = cabinetDevices.filter(cabinet_device => {
-        return cabinet_device['device_id'] != device_id;
-      });
-      localStorage.setItem('cabinet_devices',JSON.stringify(updatedCabinetDevices));
+      if (cabinetDevices !== null) {
+        let updatedCabinetDevices = cabinetDevices.filter(cabinet_device => {
+          return cabinet_device['device_id'] != device_id;
+        });
+        localStorage.setItem('cabinet_devices',JSON.stringify(updatedCabinetDevices));
+      }
 
       // DELETE DEVICE
       let devices = this.data.getLocalStorageData('devices');
