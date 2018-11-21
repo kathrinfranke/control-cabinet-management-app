@@ -175,7 +175,7 @@ export class CabinetDevicesComponent implements OnInit {
       let cabinet_devices = this.data.getLocalStorageData(key) || [];
       if (!(cabinet_devices instanceof Array)) { cabinet_devices = [cabinet_devices]; }
       cabinet_devices.push(data);
-      localStorage.setItem(key, JSON.stringify(cabinet_devices));
+      this.data.setData(key, cabinet_devices);
       $('form').prepend('<div class="alert alert-success" role="alert">Das Gerät wurde erfolgreich zugewiesen.</div>');
       setTimeout(function() {
         $('form .alert').fadeOut()

@@ -54,7 +54,7 @@ export class CabinetCreateComponent implements OnInit {
          cabinet = [cabinet];
       }
       cabinet.push(data);
-      localStorage.setItem('cabinets', JSON.stringify(cabinet));
+      this.data.setData('cabinets', cabinet);
       $('form').prepend('<div class="alert alert-success" role="alert">Der Schaltschrank wurde erfolgreich gespeichert.</div>');
       setTimeout(function() {
         $('form .alert').fadeOut()

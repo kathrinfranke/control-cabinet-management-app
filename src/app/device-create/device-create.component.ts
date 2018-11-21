@@ -51,7 +51,7 @@ export class DeviceCreateComponent implements OnInit {
       let device = this.data.getLocalStorageData('devices') || [];
       if (!(device instanceof Array)) { device = [device]; }
       device.push(data);
-      localStorage.setItem('devices', JSON.stringify(device));
+      this.data.setData('devices', device);
       $('form').prepend('<div class="alert alert-success" role="alert">Das Gerät wurde erfolgreich gespeichert.</div>');
       setTimeout(function() {
         $('form .alert').fadeOut()

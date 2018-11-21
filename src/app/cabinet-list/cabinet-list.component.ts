@@ -25,7 +25,7 @@ export class CabinetListComponent implements OnInit {
         let updatedCabinetDevices = cabinetDevices.filter(cabinet_device => {
           return cabinet_device['cabinet_id'] != cabinet_id;
         });
-        localStorage.setItem('cabinet_devices',JSON.stringify(updatedCabinetDevices));
+        this.data.setData('cabinet_devices', updatedCabinetDevices);
       }
 
       // DELETE CABINET
@@ -33,7 +33,7 @@ export class CabinetListComponent implements OnInit {
       let updatedCabinets = cabinets.filter(cabinet => {
         return cabinet['id'] != cabinet_id;
       });
-      localStorage.setItem('cabinets',JSON.stringify(updatedCabinets));
+      this.data.setData('cabinets', updatedCabinets);
     }
   }
 
