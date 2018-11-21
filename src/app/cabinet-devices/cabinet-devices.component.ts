@@ -172,7 +172,7 @@ export class CabinetDevicesComponent implements OnInit {
     // DATA
     let data = {cabinet_id: selected_cabinet, device_id: selected_device, position: selected_position};
     try {
-      let cabinet_devices = JSON.parse(localStorage.getItem(key)) || [];
+      let cabinet_devices = this.data.getLocalStorageData(key) || [];
       if (!(cabinet_devices instanceof Array)) { cabinet_devices = [cabinet_devices]; }
       cabinet_devices.push(data);
       localStorage.setItem(key, JSON.stringify(cabinet_devices));
