@@ -46,20 +46,26 @@
         <option [value]="'none'" selected>-- Schaltschrank wählen --</option>
         <option [value]="cabinet.id" *ngFor="let cabinet of cabinets">{{cabinet.id}}</option>
       </select>
-      <div class="d-none" id="cabinetDetails">
-        <b>Maße Schaltschrank {{selected_cabinet["id"]}}:</b><br/>
-        Breite: <b>{{selected_cabinet["width"]}}</b> | Höhe: <b>{{selected_cabinet["height"]}}</b>
-      </div>
-      <select formControlName="coordinateSelect" class="form-control my-4" #coord (change)="onPositionChange()" *ngIf="coordinates && coordinates.length > 0">
-        <option [value]="'none'" selected>-- Positionierung wählen --</option>
-        <option [ngValue]="coord" *ngFor="let coord of coordinates">x: {{coord['x']}} / y: {{coord['y']}}</option>
-      </select>
-      <p *ngIf="coordinates && coordinates.length === 0" class="alert alert-warning">
-        Leider gibt es für das Gerät keinen Platz in diesem Schaltschrank.
-      </p>
-      <div class="text-right" *ngIf="cabinetDeviceForm.controls.coordinateSelect.value !== 'none'">
-        <button type="submit" class="btn btn-success">zuweisen</button>
-      </div>
+
+      <ng-container *ngIf="selected_cabinet">
+
+        <div id="cabinetDetails">
+          <b>Maße Schaltschrank {{selected_cabinet["id"]}}:</b><br/>
+          Breite: <b>{{selected_cabinet["width"]}}</b> | Höhe: <b>{{selected_cabinet["height"]}}</b>
+        </div>
+        <select formControlName="coordinateSelect" class="form-control my-4" #coord (change)="onPositionChange()" *ngIf="coordinates && coordinates.length > 0">
+          <option [value]="'none'" selected>-- Positionierung wählen --</option>
+          <option [ngValue]="coord" *ngFor="let coord of coordinates">x: {{coord['x']}} / y: {{coord['y']}}</option>
+        </select>
+        <p *ngIf="coordinates && coordinates.length === 0" class="alert alert-warning">
+          Leider gibt es für das Gerät keinen Platz in diesem Schaltschrank.
+        </p>
+        <div class="text-right" *ngIf="cabinetDeviceForm.controls.coordinateSelect.value !== 'none'">
+          <button type="submit" class="btn btn-success">zuweisen</button>
+        </div>
+
+      </ng-container>
+
     </form>
   </div>
 

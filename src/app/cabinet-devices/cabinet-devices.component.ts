@@ -50,7 +50,6 @@ export class CabinetDevicesComponent implements OnInit {
    }
 
   onCabinetChange(cabinet_id) {
-    this.cabinetDetails = document.getElementById('cabinetDetails') as HTMLElement;
     this.cabinetMockup = document.getElementById('cabinetMockup') as HTMLElement;
     // REMOVE PREVIOUS ELEMENT
     var oldDevicePlacement = document.getElementById('devicePlacement');
@@ -65,12 +64,10 @@ export class CabinetDevicesComponent implements OnInit {
     // CABINET SELECTED?
     if (cabinet_id == 'none') {
      console.log('no value selected');
-     this.cabinetDetails.classList.add("d-none");
      this.cabinetMockup.classList.add("d-none");
      this.cabinetDeviceForm.controls.coordinateSelect.disable();
     } else {
       // SHOW MOCKUP AND DETAILS
-      this.cabinetDetails.classList.remove("d-none");
       this.cabinetMockup.classList.remove("d-none");
       this.cabinetDeviceForm.controls.coordinateSelect.enable();
       // SELECTED CABINET
