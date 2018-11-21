@@ -116,4 +116,8 @@ export class DataService {
     return suitables;
   }
 
+  setData(key: string, data: any) {
+    localStorage.setItem(key, JSON.stringify(data));
+  }
+
 }
