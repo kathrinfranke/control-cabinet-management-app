@@ -15,12 +15,12 @@
       <td>{{device["width"]}}</td>
       <td>{{device["height"]}}</td>
       <td>
-        <div *ngIf="this.assignedCabinet === undefined || this.assignedCabinet.length === 0">
-          <a [routerLink]="['/geraete/zuweisen', device.id]" class="btn btn-info" [hidden]="this.data.getLocalStorageData('cabinets') === null">zuweisen</a>
+        <div *ngIf="assignedCabinet === undefined || assignedCabinet.length === 0">
+          <a [routerLink]="['/geraete/zuweisen', device.id]" class="btn btn-info" [hidden]="data.getLocalStorageData('cabinets') === null">zuweisen</a>
         </div>
-        <div *ngIf="this.assignedCabinet !== undefined">
-          <span class="d-inline-block px-3 text-dark bg-light">{{this.assignedCabinet['cabinet_id']}}</span><br />
-          (x: {{this.assignedCabinet['position']['x']}} / y: {{this.assignedCabinet['position']['y']}})
+        <div *ngIf="assignedCabinet !== undefined">
+          <span class="d-inline-block px-3 text-dark bg-light">{{assignedCabinet['cabinet_id']}}</span><br />
+          (x: {{assignedCabinet['position']['x']}} / y: {{assignedCabinet['position']['y']}})
         </div>
       </td>
     </tr>

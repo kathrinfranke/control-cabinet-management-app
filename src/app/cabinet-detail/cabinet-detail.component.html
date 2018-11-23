@@ -17,12 +17,12 @@
   </tbody>
 </table>
 
-<p *ngIf="this.cabinet_devices === undefined || (this.cabinet_devices !== undefined && this.cabinet_devices.length === 0)">
+<p *ngIf="cabinet_devices === undefined || (cabinet_devices !== undefined && cabinet_devices.length === 0)">
   <em>Keine zugewiesenen Geräte vorhanden.</em>
 </p>
 
-<div *ngIf="this.cabinet_devices !== undefined && this.cabinet_devices.length > 0">
-  <h1 class="display-3 mb-2">Zugewiesene Geräte ({{this.cabinet_devices.length}})</h1>
+<div *ngIf="cabinet_devices !== undefined && cabinet_devices.length > 0">
+  <h1 class="display-3 mb-2">Zugewiesene Geräte ({{cabinet_devices.length}})</h1>
 
   <table class="table table-dark">
     <thead>
@@ -35,9 +35,9 @@
     </thead>
     <tbody>
       <tr *ngFor="let cabinet_device of this.cabinet_devices">
-        <td>{{this.data.getLocalStorageDataItem('devices',cabinet_device['device_id'])[0]['id']}}</td>
-        <td>{{this.data.getLocalStorageDataItem('devices',cabinet_device['device_id'])[0]['width']}}</td>
-        <td>{{this.data.getLocalStorageDataItem('devices',cabinet_device['device_id'])[0]['height']}}</td>
+        <td>{{data.getLocalStorageDataItem('devices',cabinet_device['device_id'])[0]['id']}}</td>
+        <td>{{data.getLocalStorageDataItem('devices',cabinet_device['device_id'])[0]['width']}}</td>
+        <td>{{data.getLocalStorageDataItem('devices',cabinet_device['device_id'])[0]['height']}}</td>
         <td>x: {{cabinet_device['position']['x']}} / y: {{cabinet_device['position']['y']}}</td>
       </tr>
     </tbody>

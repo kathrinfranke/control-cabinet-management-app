@@ -19,7 +19,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let cabinet of this.data.getLocalStorageData('cabinets');">
+      <tr *ngFor="let cabinet of data.getLocalStorageData('cabinets');">
         <td>{{cabinet["id"]}}</td>
         <td>{{cabinet["width"]}}</td>
         <td>{{cabinet["height"]}}</td>
