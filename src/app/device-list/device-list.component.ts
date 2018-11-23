@@ -30,7 +30,7 @@ export class DeviceListComponent implements OnInit {
         let updatedCabinetDevices = cabinetDevices.filter(cabinet_device => {
           return cabinet_device['device_id'] != device_id;
         });
-        localStorage.setItem('cabinet_devices',JSON.stringify(updatedCabinetDevices));
+        this.data.setData('cabinet_devices', updatedCabinetDevices);
       }
 
       // DELETE DEVICE
@@ -38,7 +38,7 @@ export class DeviceListComponent implements OnInit {
       let updatedDevices = devices.filter(device => {
         return device['id'] != device_id;
       });
-      localStorage.setItem('devices',JSON.stringify(updatedDevices));
+      this.data.setData('devices', updatedDevices);
     }
   }
 }

@@ -4,25 +4,25 @@
 <div class="row">
   <div class="col-12">
     <p>
-      <b>Maße Gerät {{device["id"]}}:</b> <br />
+      <b>Maße Gerät {{device["id"]}}:</b> <br/>
       Breite: {{device_width}} | Höhe: {{device_height}}
     </p>
   </div>
 </div>
 
-<hr />
+<hr/>
 
-<div [hidden]="this.data.assignableCheck(device['id']) == true" class="alert alert-warning">
+<div [hidden]="data.assignableCheck(device['id']) == true" class="alert alert-warning">
   <p class="mb-0">
-    Das Gerät wurde einem Schaltschrank zugewiesen.<br />
+    Das Gerät wurde einem Schaltschrank zugewiesen.<br/>
     <a class="text-dark" routerLink="/geraete"><i class="material-icons">navigate_before</i> zurück zur Übersicht</a>
   </p>
 </div>
 
-<div *ngIf="this.cabinets.length === 0" class="alert alert-warning">
+<div *ngIf="cabinets.length === 0" class="alert alert-warning">
   <p class="mb-0">
-    Leider gibt es momentan keine Schaltschränke, in welche das Gerät passt.<br />
-    <a class="text-dark" routerLink="/schaltschraenke"><i class="material-icons">navigate_before</i> Jetzt Schaltschrank anlegen</a><br />
+    Leider gibt es momentan keine Schaltschränke, in welche das Gerät passt.<br/>
+    <a class="text-dark" routerLink="/schaltschraenke"><i class="material-icons">navigate_before</i> Jetzt Schaltschrank anlegen</a><br/>
     <a class="text-dark" routerLink="/geraete"><i class="material-icons">navigate_before</i> zurück zur Übersicht</a>
   </p>
 </div>
@@ -32,7 +32,7 @@
   <div class="col-sm-6">
     <div id="cabinetMockup" class="d-none cabinet-mockup mx-auto my-2" [ngStyle]="{width: styleCabinetWidth + 'px', height: styleCabinetHeight + 'px'}">
       <div class="cabinet-mockup--body">
-        <div *ngFor="let cabinetDevice of this.cabinetDevices">
+        <div *ngFor="let cabinetDevice of cabinetDevices">
           <span class="cabinet-device" [ngStyle]="setCabinetDeviceStyles(cabinetDevice['device_id'],cabinetDevice['position'])">
           </span>
         </div>
@@ -41,25 +41,31 @@
     </div>
   </div>
   <div class="col-sm-6">
-    <form [formGroup]="cabinetDeviceForm" (ngSubmit)="addDeviceToCabinet()" [hidden]="this.data.assignableCheck(device['id']) == false || this.cabinets.length === 0">
+    <form [formGroup]="cabinetDeviceForm" (ngSubmit)="addDeviceToCabinet()" [hidden]="data.assignableCheck(device['id']) == false || cabinets.length === 0">
       <select formControlName="cabinetSelect" class="form-control" #cabinet (change)="onCabinetChange(cabinet.value)">
-         <option [value]="'none'" selected>-- Schaltschrank wählen --</option>
-         <option [value]="cabinet.id" *ngFor="let cabinet of cabinets">{{cabinet.id}}</option>
-       </select>
-       <div class="d-none" id="cabinetDetails">
-         <b>Maße Schaltschrank {{selected_cabinet["id"]}}:</b><br />
-         Breite: <b>{{selected_cabinet["width"]}}</b> | Höhe: <b>{{selected_cabinet["height"]}}</b>
-       </div>
-       <select formControlName="coordinateSelect" class="form-control my-4" #coord (change)="onPositionChange()" *ngIf="this.coordinates && this.coordinates.length > 0">
-        <option [value]="'none'" selected>-- Positionierung wählen --</option>
-        <option [ngValue]="coord" *ngFor="let coord of coordinates">x: {{coord['x']}} / y: {{coord['y']}}</option>
+        <option [value]="'none'" selected>-- Schaltschrank wählen --</option>
+        <option [value]="cabinet.id" *ngFor="let cabinet of cabinets">{{cabinet.id}}</option>
       </select>
-      <p *ngIf="this.coordinates && this.coordinates.length === 0" class="alert alert-warning">
-        Leider gibt es für das Gerät keinen Platz in diesem Schaltschrank.
-      </p>
-      <div class="text-right" *ngIf="this.cabinetDeviceForm.controls.coordinateSelect.value !== 'none'">
-        <button type="submit" class="btn btn-success">zuweisen</button>
-      </div>
+
+      <ng-container *ngIf="selected_cabinet">
+
+        <div id="cabinetDetails">
+          <b>Maße Schaltschrank {{selected_cabinet["id"]}}:</b><br/>
+          Breite: <b>{{selected_cabinet["width"]}}</b> | Höhe: <b>{{selected_cabinet["height"]}}</b>
+        </div>
+        <select formControlName="coordinateSelect" class="form-control my-4" #coord (change)="onPositionChange()" *ngIf="coordinates && coordinates.length > 0">
+          <option [value]="'none'" selected>-- Positionierung wählen --</option>
+          <option [ngValue]="coord" *ngFor="let coord of coordinates">x: {{coord['x']}} / y: {{coord['y']}}</option>
+        </select>
+        <p *ngIf="coordinates && coordinates.length === 0" class="alert alert-warning">
+          Leider gibt es für das Gerät keinen Platz in diesem Schaltschrank.
+        </p>
+        <div class="text-right" *ngIf="cabinetDeviceForm.controls.coordinateSelect.value !== 'none'">
+          <button type="submit" class="btn btn-success">zuweisen</button>
+        </div>
+
+      </ng-container>
+
     </form>
   </div>
 

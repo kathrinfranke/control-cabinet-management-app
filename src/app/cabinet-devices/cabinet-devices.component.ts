@@ -50,7 +50,6 @@ export class CabinetDevicesComponent implements OnInit {
    }
 
   onCabinetChange(cabinet_id) {
-    this.cabinetDetails = document.getElementById('cabinetDetails') as HTMLElement;
     this.cabinetMockup = document.getElementById('cabinetMockup') as HTMLElement;
     // REMOVE PREVIOUS ELEMENT
     var oldDevicePlacement = document.getElementById('devicePlacement');
@@ -65,12 +64,10 @@ export class CabinetDevicesComponent implements OnInit {
     // CABINET SELECTED?
     if (cabinet_id == 'none') {
      console.log('no value selected');
-     this.cabinetDetails.classList.add("d-none");
      this.cabinetMockup.classList.add("d-none");
      this.cabinetDeviceForm.controls.coordinateSelect.disable();
     } else {
       // SHOW MOCKUP AND DETAILS
-      this.cabinetDetails.classList.remove("d-none");
       this.cabinetMockup.classList.remove("d-none");
       this.cabinetDeviceForm.controls.coordinateSelect.enable();
       // SELECTED CABINET
@@ -172,10 +169,10 @@ export class CabinetDevicesComponent implements OnInit {
     // DATA
     let data = {cabinet_id: selected_cabinet, device_id: selected_device, position: selected_position};
     try {
-      let cabinet_devices = JSON.parse(localStorage.getItem(key)) || [];
+      let cabinet_devices = this.data.getLocalStorageData(key) || [];
       if (!(cabinet_devices instanceof Array)) { cabinet_devices = [cabinet_devices]; }
       cabinet_devices.push(data);
-      localStorage.setItem(key, JSON.stringify(cabinet_devices));
+      this.data.setData(key, cabinet_devices);
       $('form').prepend('<div class="alert alert-success" role="alert">Das Gerät wurde erfolgreich zugewiesen.</div>');
       setTimeout(function() {
         $('form .alert').fadeOut()
