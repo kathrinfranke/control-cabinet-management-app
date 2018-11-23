@@ -19,7 +19,7 @@
           <a [routerLink]="['/geraete/zuweisen', device.id]" class="btn btn-info" [hidden]="data.getLocalStorageData('cabinets') === null">zuweisen</a>
         </div>
         <div *ngIf="assignedCabinet !== undefined">
-          <span class="d-inline-block px-3 text-dark bg-light">{{assignedCabinet['cabinet_id']}}</span><br />
+          <span class="d-inline-block px-3 text-dark bg-light">{{assignedCabinet['cabinet_id']}}</span><br/>
           (x: {{assignedCabinet['position']['x']}} / y: {{assignedCabinet['position']['y']}})
         </div>
       </td>

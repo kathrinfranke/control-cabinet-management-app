@@ -2,7 +2,7 @@
 
 <app-device-create></app-device-create>
 
-<hr />
+<hr/>
 
 <p *ngIf="data.getLocalStorageData('devices') === null">
   Derzeit sind noch keine Geräte vorhanden.
@@ -25,7 +25,7 @@
         <td>{{device["height"]}}</td>
         <td>
           <div *ngIf="displayAssignedCabinet(device['id']) != undefined">
-            <span class="d-inline-block px-3 text-dark bg-light">{{displayAssignedCabinet(device["id"])}}</span><br />
+            <span class="d-inline-block px-3 text-dark bg-light">{{displayAssignedCabinet(device["id"])}}</span><br/>
           </div>
           <a [routerLink]="['/geraete/zuweisen', device.id]" class="btn btn-info" [hidden]="(displayAssignedCabinet(device['id']) != undefined) || (this.data.getLocalStorageData('cabinets') === null)">zuweisen</a>
         </td>
