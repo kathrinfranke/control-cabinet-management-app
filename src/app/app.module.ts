@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
-import { MatIconModule } from "@angular/material/icon";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatIconModule } from '@angular/material/icon';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // COMPONENTS
 import { AppComponent } from './app.component';

@@ -22,10 +22,10 @@ export class CabinetCreateComponent implements OnInit {
   }
 
   // CUSTOM VALIDATORS
-  validID = (control: AbstractControl): { [key: string]: boolean } | null =>{
+  validID = (control: AbstractControl): { [key: string]: boolean } | null => {
     if (this.data.getLocalStorageData('cabinets') !== null) {
-      let resultOfValidation = this.data.getLocalStorageData('cabinets').filter(cabinet => {
-        return cabinet['id'] == control.value;
+      const resultOfValidation = this.data.getLocalStorageData('cabinets').filter(cabinet => {
+        return cabinet['id'] === control.value;
       });
       if (resultOfValidation.length === 0) {
         return null;
@@ -36,7 +36,7 @@ export class CabinetCreateComponent implements OnInit {
       return null;
     }
   }
-  validContent = (control: AbstractControl): { [key: string]: boolean } | null =>{
+  validContent = (control: AbstractControl): { [key: string]: boolean } | null => {
     if ( !isNaN(control.value) ) {
       return null;
     } else {
@@ -46,8 +46,8 @@ export class CabinetCreateComponent implements OnInit {
 
 
   addCabinet() {
-    let key = 'cabinets';
-    let data = this.cabinetForm.value;
+    const key = 'cabinets';
+    const data = this.cabinetForm.value;
     try {
       let cabinet = this.data.getLocalStorageData('cabinets') || [];
       if (!(cabinet instanceof Array)) {
@@ -57,13 +57,13 @@ export class CabinetCreateComponent implements OnInit {
       this.data.setData('cabinets', cabinet);
       $('form').prepend('<div class="alert alert-success" role="alert">Der Schaltschrank wurde erfolgreich gespeichert.</div>');
       setTimeout(function() {
-        $('form .alert').fadeOut()
+        $('form .alert').fadeOut();
       }, 1500);
-      $('form').trigger("reset");
+      $('form').trigger('reset');
     } catch (e) {
       $('form').prepend('<div class="alert alert-danger" role="alert">Es ist ein Fehler aufgetreten! Die Daten konnten nicht gespeichert werden.</div>');
       setTimeout(function() {
-        $('form .alert').fadeOut()
+        $('form .alert').fadeOut();
       }, 2000);
       console.error('Error saving to localStorage', e);
     }

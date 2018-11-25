@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DataService } from '../data.service';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-cabinet-detail',
@@ -12,8 +12,8 @@ export class CabinetDetailComponent {
   cabinet_devices: any;
 
   constructor(private data: DataService, private route: ActivatedRoute) {
-    let id = this.route.snapshot.params["id"];
-    this.cabinet = this.data.getLocalStorageDataItem('cabinets',id)[0];
+    const id = this.route.snapshot.params['id'];
+    this.cabinet = this.data.getLocalStorageDataItem('cabinets', id)[0];
     this.cabinet_devices = this.data.getCabinetDevices(this.cabinet['id']);
   }
 
