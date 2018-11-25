@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Cabinet } from '../interfaces/cabinet';
 import { DataService } from '../data.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { DataService } from '../data.service';
 
 export class CabinetListComponent implements OnInit {
 
-  cabinets: any[];
+  cabinets: Cabinet;
 
   constructor(private data: DataService) { }
 

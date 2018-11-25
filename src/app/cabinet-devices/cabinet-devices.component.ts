@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../data.service';
+import { Cabinet } from '../interfaces/cabinet';
+import { Device } from '../interfaces/device';
+import { CabinetDevice } from '../interfaces/cabinet-device';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -9,16 +12,16 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
   styleUrls: ['./cabinet-devices.component.scss']
 })
 export class CabinetDevicesComponent implements OnInit {
-  id: number[];
-  device: any[];
+  id: number;
+  device: Device;
   device_width: number;
   device_height: number;
-  cabinets: any[];
+  cabinets: Cabinet;
   coordinates: any[];
 
-  selected_cabinet: any;
+  selected_cabinet: number;
 
-  cabinetDevices: any[];
+  cabinetDevices: CabinetDevice[];
   assignable: boolean;
 
   cabinetDetails: HTMLElement;

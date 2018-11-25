@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Cabinet } from '../interfaces/cabinet';
+import { CabinetDevice } from '../interfaces/cabinet-device';
 import { DataService } from '../data.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -8,8 +10,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./cabinet-detail.component.scss']
 })
 export class CabinetDetailComponent {
-  cabinet: any[];
-  cabinet_devices: any;
+  cabinet: Cabinet;
+  cabinet_devices: CabinetDevice[];
 
   constructor(private data: DataService, private route: ActivatedRoute) {
     const id = this.route.snapshot.params['id'];

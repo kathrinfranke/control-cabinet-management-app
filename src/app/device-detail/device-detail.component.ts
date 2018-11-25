@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Device } from '../interfaces/device';
+import { CabinetDevice } from '../interfaces/cabinet-device';
 import { DataService } from '../data.service';
 
 @Component({
@@ -8,8 +10,8 @@ import { DataService } from '../data.service';
 })
 export class DeviceDetailComponent {
 
-  device: any[];
-  assignedCabinet: any;
+  device: Device;
+  assignedCabinet: CabinetDevice;
 
   constructor(private data: DataService, private route: ActivatedRoute) {
     const id = this.route.snapshot.params['id'];

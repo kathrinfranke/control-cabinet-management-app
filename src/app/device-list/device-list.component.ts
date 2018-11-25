@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Device } from '../interfaces/device';
 import { DataService } from '../data.service';
 
 @Component({
@@ -6,8 +7,7 @@ import { DataService } from '../data.service';
   templateUrl: './device-list.component.html'
 })
 export class DeviceListComponent implements OnInit {
-  devices: any;
-  assignedCabinets: any;
+  devices: Device;
 
   constructor(private data: DataService) { }
 
